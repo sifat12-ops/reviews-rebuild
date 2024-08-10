@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-300  flex items-center min-h-screen">
+    <section>
+    <div class="w-4/12 mx-auto bg-white shadow-md text-center p-10">
+        <div class="w-5/12 mx-auto">
+            <img src="img/1-1.jpg" id="pic" class="w-full rounded-full bg-cover border-8 border-slate-400 transition duration-100" alt="">
+        </div>
+        <div class="my-10">
+            <h1 id="person" class="font-bold text-4xl transition duration-100">Jann Mardenborough</h1>
+            <p id="bio" class="text-base opacity-75 my-5 transition duration-100">I am the only racecar driver who got a chance through simulator</p>
+        </div>
+        <div class="flex justify-between w-2/12  mx-auto">
+            <button  class="prev w-4/12">
+                <img class="w-full opacity-40 hover:opacity-100" src="img/left-arrow.png" alt="">
+            </button>
+            <button class="next w-4/12">
+                <img class="w-full opacity-40 hover:opacity-100" src="img/right-arrow.png" alt="">
+            </button>
+        </div>
+        <div class="my-10">
+            <button class="surprise bg-red-400 p-2 rounded-full border-4 border-red-600 text-white font-semibold hover:bg-red-600 hover:border-red-400">Surprise me </button>
+        </div>
+    </div>
+    </section>
+    <script>
+        const reviews = [{
+                            profile: "img/1-1.jpg",
+                            name:'Jann Mardenborough',
+                            info:'I am the only racecar driver who got a chance through simulator'},
+                         {
+                            profile: "img/2-1.jpg",
+                            name:'Lucas James',
+                            info:'I am your local salesman who strives to work hard as possible.'
+                         },
+                         {
+                            profile:"img/3-1.jpg",
+                            name:'Martin Jordan',
+                            info:'Hey Hey got nothing to say but what\'s cooking'
+                         },
+             ];
+            
+           let counter = 0;
+
+           const pic = document.getElementById('pic');
+           const person = document.getElementById('person');
+           const bio = document.getElementById('bio');
+
+           const next = document.querySelector('.next');
+           const prev = document.querySelector('.prev');
+           const surprise = document.querySelector('.surprise');
+
+           window.addEventListener( 'DOMContentLoaded', showPerson);
+
+           function showPerson() {
+              const item = reviews[counter];
+              pic.src = item.profile;
+              person.textContent = item.name;
+              bio.textContent = item.info;
+              }
+            
+            next.addEventListener('click',
+             function () {
+                counter++;
+                if(counter > reviews.length - 1) {
+                    counter = 0;
+                }
+                showPerson();
+            })
+
+            prev.addEventListener('click',
+             function () {
+                counter--;
+                if(counter < 0) {
+                    counter = reviews.length -1;
+                }
+                showPerson();
+            })
+
+            surprise.addEventListener('click', 
+               function () {
+                counter = Math.floor(Math.random() * reviews.length);
+                showPerson();
+               }      
+            )
+
+    </script>
+</body>
+</html>
